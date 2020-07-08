@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-
+import { NavLink } from 'react-router-dom';
 class RegisterPage extends Component {
   state = {
     username: '',
@@ -74,6 +74,7 @@ class RegisterPage extends Component {
           </div>
         </form>
         <center>
+          <NavLink to='/login'>
           <button
             type="button"
             className="link-button"
@@ -81,6 +82,7 @@ class RegisterPage extends Component {
           >
             Login
           </button>
+          </NavLink>
         </center>
       </div>
     );

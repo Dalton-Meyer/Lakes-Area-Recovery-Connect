@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-
+import { NavLink } from 'react-router-dom';
 class LoginPage extends Component {
   state = {
     username: '',
@@ -74,13 +74,14 @@ class LoginPage extends Component {
           </div>
         </form>
         <center>
-          <button
+        <NavLink to='/register'>  <button
             type="button"
             className="link-button"
             onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
           >
             Register
           </button>
+          </NavLink>
         </center>
       </div>
     );
