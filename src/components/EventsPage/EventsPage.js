@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {Table} from 'evergreen-ui'
 import './EventsPage.css'
-import { Link } from "react-router-dom";
+
 
 // this is the header component that displays on every page
 

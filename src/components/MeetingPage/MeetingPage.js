@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import {Pane, Tab, Tablist, Select, Table} from "evergreen-ui"
 import './MeetingPage.css'
-import { Link } from "react-router-dom";
+
 
 // this is the header component that displays on every page
 

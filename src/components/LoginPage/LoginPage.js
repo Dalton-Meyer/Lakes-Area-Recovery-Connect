@@ -1,10 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
+import Nav from '../Nav/Nav';
 class LoginPage extends Component {
   state = {
     username: '',
     password: '',
+    redirect: false,
   };
 
   login = (event) => {
@@ -18,6 +20,7 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
+      this.setState({redirect: true})
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -29,9 +32,16 @@ class LoginPage extends Component {
     });
   }
 
+  renderRedirect = () => {
+    if (this.state.redirect) {
+      return <Redirect to = "/home" />
+    }
+  }
+
   render() {
     return (
       <div>
+        {this.renderRedirect()}
         {this.props.errors.loginMessage && (
           <h2
             className="alert"
