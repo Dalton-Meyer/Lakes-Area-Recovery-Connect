@@ -20,8 +20,10 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage'
 import HomePage from '../HomePage/HomePage'
 import MeetingPage from '../MeetingPage/MeetingPage'
+import EventPage from '../EventsPage/EventsPage'
 
 import './App.css';
+import EventsPage from '../EventsPage/EventsPage';
 
 class App extends Component {
   componentDidMount () {
@@ -62,6 +64,11 @@ class App extends Component {
               exact
               path='/meetings'
               component={MeetingPage}
+            />
+            <Route
+              exact
+              path='/events'
+              component={EventsPage}
             />
             
             {/* For protected routes, the view could show one of several things on the same route.

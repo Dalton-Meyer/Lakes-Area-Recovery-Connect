@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
+import {Table} from 'evergreen-ui'
+import './EventsPage.css'
 import { Link } from "react-router-dom";
 
 // this is the header component that displays on every page
@@ -7,8 +9,26 @@ import { Link } from "react-router-dom";
 class Events extends Component {
   render() {
     return (
-        <div>
-
+        <div className='events'>
+            <h1>All Events</h1>
+            <Table>
+      <Table.Head>
+          <Table.TextHeaderCell>
+              Event
+          </Table.TextHeaderCell>
+          <Table.TextHeaderCell>
+              Location
+          </Table.TextHeaderCell>
+          <Table.TextHeaderCell>
+              Date
+          </Table.TextHeaderCell>
+      </Table.Head>
+      <Table.Body>
+          <Table.Row>
+              
+          </Table.Row>
+      </Table.Body>
+  </Table>
       </div>
     )
   }
