@@ -18,6 +18,7 @@ import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage'
+import HomePage from '../HomePage/HomePage'
 
 import './App.css';
 
@@ -51,6 +52,12 @@ class App extends Component {
               path='/register'
               component={RegisterPage}
             />
+            <Route
+              exact
+              path='/home'
+              component={HomePage}
+            />
+            
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
