@@ -21,6 +21,7 @@ import RegisterPage from '../RegisterPage/RegisterPage'
 import HomePage from '../HomePage/HomePage'
 import MeetingPage from '../MeetingPage/MeetingPage'
 import ContactPage from '../ContactPage/ContactPage'
+import ReadingPage from '../ReadingPage/ReadingPage'
 
 import './App.css';
 import EventsPage from '../EventsPage/EventsPage';
@@ -89,8 +90,8 @@ class App extends Component {
             they will see the info page instead. */}
             <ProtectedRoute
               exact
-              path="/info"
-              component={InfoPage}
+              path="/reading"
+              component={ReadingPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />

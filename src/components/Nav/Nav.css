@@ -34,3 +34,10 @@
 .nav-right {
   float: right;
 }
+.dropDown{
+  display: flex;
+  flex-direction: column;
+}
+.dropButton{
+  text-align: center;
+}

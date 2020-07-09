@@ -37,13 +37,15 @@ const Nav = (props) => (
       {props.user.id ?  
         <>
              <SelectMenu
-   title="Empty view"
+   title="Menu"
    options={[]}
    emptyView={({ close }) => (
-     <Pane height="100%" display="flex" alignItems="center" justifyContent="center">
-       <LogOutButton className="log-in" />
-       <Link to='/home'>Home</Link>
+     <Pane className='dropDown' height="100%" >
+       <Link to='/reading'><Button width="100%">Daily Reading</Button></Link>
+       <Link to='/home'><Button width="100%">Notes</Button></Link>
+       <Link to='/home'><Button width="100%">Settings</Button></Link>
        <Button onClick={close}>Close</Button>
+       <LogOutButton className="log-in" />
      </Pane>
    )}
  >
