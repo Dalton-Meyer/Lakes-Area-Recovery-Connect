@@ -19,6 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage'
 import HomePage from '../HomePage/HomePage'
+import MeetingPage from '../MeetingPage/MeetingPage'
 
 import './App.css';
 
@@ -56,6 +57,11 @@ class App extends Component {
               exact
               path='/home'
               component={HomePage}
+            />
+             <Route
+              exact
+              path='/meetings'
+              component={MeetingPage}
             />
             
             {/* For protected routes, the view could show one of several things on the same route.
