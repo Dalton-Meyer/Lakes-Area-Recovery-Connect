@@ -42,7 +42,7 @@ const Nav = (props) => (
    emptyView={({ close }) => (
      <Pane className='dropDown' height="100%" >
        <Link to='/reading'><Button width="100%">Daily Reading</Button></Link>
-       <Link to='/home'><Button width="100%">Notes</Button></Link>
+       <Link to='/notes'><Button width="100%">Notes</Button></Link>
        <Link to='/home'><Button width="100%">Settings</Button></Link>
        <Button onClick={close}>Close</Button>
        <LogOutButton className="log-in" />

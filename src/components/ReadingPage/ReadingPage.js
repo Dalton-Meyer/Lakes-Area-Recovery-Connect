@@ -48,9 +48,4 @@ class ReadingPage extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-    return{
-
-    }
-}
-export default connect(mapStateToProps)(ReadingPage);
+export default connect()(ReadingPage);

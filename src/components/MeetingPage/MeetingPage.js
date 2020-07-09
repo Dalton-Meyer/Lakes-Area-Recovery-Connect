@@ -26,7 +26,7 @@ class Meeting extends Component {
                 </Tab>
             </Tablist>
             <Select width={200} value={this.state.town} onChange={event => this.setState({ town: event.target.value })}>
-      <option value="1" selected>Detroit Lakes</option>
+      <option value="1" defaultValue>Detroit Lakes</option>
       <option value="2">Perham</option>
       <option value="3">Frazee</option>
       <option value="4">Fargo</option>
