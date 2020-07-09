@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import {Pane, Tab, Tablist, Select, Table} from "evergreen-ui"
-import './MeetingPage.css'
+import {Pane, Tab, Tablist, Select, Table, Textarea, Button} from "evergreen-ui"
+import './NotesPage.css'
 
 
 // this is the header component that displays on every page
@@ -12,7 +12,16 @@ class Notes extends Component {
     }
   render() {
     return (
-        <div className='meetings'>
+        <div className='notes'>
+            <h1>Add Personal Note</h1>
+            <Pane className='textArea'>
+            <Textarea
+  name="textarea-1"
+  placeholder="Personal Note..."
+/>
+</Pane>
+<Button appearance="primary" iconBefore="download">Submit</Button>
+            <h2>Notes</h2>
             <Table>
       <Table.Head>
           <Table.TextHeaderCell>

@@ -22,6 +22,7 @@ import HomePage from '../HomePage/HomePage'
 import MeetingPage from '../MeetingPage/MeetingPage'
 import ContactPage from '../ContactPage/ContactPage'
 import ReadingPage from '../ReadingPage/ReadingPage'
+import NotesPage from '../NotesPage/NotesPage'
 
 import './App.css';
 import EventsPage from '../EventsPage/EventsPage';
@@ -92,6 +93,11 @@ class App extends Component {
               exact
               path="/reading"
               component={ReadingPage}
+            />
+               <ProtectedRoute
+              exact
+              path="/notes"
+              component={NotesPage}
             />
             {/* If none of the other routes matched, we will show a 404. */}
             <Route render={() => <h1>404</h1>} />
