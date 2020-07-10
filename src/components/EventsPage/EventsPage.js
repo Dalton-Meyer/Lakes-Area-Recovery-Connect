@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Table } from 'evergreen-ui'
+import { Table, Pane } from 'evergreen-ui'
 import './EventsPage.css'
 
 
@@ -9,6 +9,18 @@ import './EventsPage.css'
 class Events extends Component {
     render() {
         return (
+            <Pane
+                width='100%'
+                display="flex"
+                alignItems="center"
+                justifyContent="center"
+                border="default">
+                    <Pane
+                    width='70%'
+                    height={800}
+                    display="flex"
+                    justifyContent="center"
+                    border="default">
             <div className='events'>
                 <h1>All Events</h1>
                 <Table>
@@ -30,6 +42,8 @@ class Events extends Component {
                     </Table.Body>
                 </Table>
             </div>
+            </Pane>
+            </Pane>
         )
     }
 }

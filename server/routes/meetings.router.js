@@ -5,9 +5,11 @@ const router = express.Router();
 
 // start GET to /movies
 router.get("/", (req, res) => {
+    const meet = req.body;
   // setting query text to select all movies
-  const queryText = `SELECT * FROM meeting JOIN Location ON town_id = town_id 
-  JOIN Organization ON org_id = org_id 
+  const queryText = `SELECT * FROM meeting 
+  JOIN town ON location_id = town_id 
+  JOIN Organization ON org_id = meeting_id 
   WHERE town_id = $1
   WHERE org_id = $2`;
   pool

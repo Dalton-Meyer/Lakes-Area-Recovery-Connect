@@ -20,7 +20,7 @@ router.get("/", (req, res) => {
     });
 });
 
-route.post("/", (req,res) => {
+router.post("/", (req,res) => {
     const note = req.body
     const queryText = `INSERT INTO Notes(user_id, note, note_title, date)
     VALUES ($1, $2, $3, $4)`

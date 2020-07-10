@@ -1,7 +1,8 @@
-import { all } from 'redux-saga/effects';
+import { all, takeEvery, put } from 'redux-saga/effects';
 import loginSaga from './loginSaga';
 import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
+import axios from 'axios';
 
 function* fetchContact(action) {
   try {
@@ -19,9 +20,26 @@ function* fetchNotes(action) {
     console.log("Error getting notes ", error);
   }
 } 
+function* addNotes(action) {
+  try {
+    yield axios.put("/api/notes", action.payload)
+    const response = yield axios.get("/api/notes");
+    yield put({ type: "SET_NOTE", payload: response.data });
+  } catch (error) {
+    console.log("Error getting notes ", error);
+  }
+} 
 function* fetchEvent(action) {
   try {
     const response = yield axios.get("/api/event");
+    yield put({ type: "SET_EVENT", payload: response.data });
+  } catch (error) {
+    console.log("Error getting events ", error);
+  }
+} 
+function* fetchEventMain(action) {
+  try {
+    const response = yield axios.get("/api/event/main");
     yield put({ type: "SET_EVENT", payload: response.data });
   } catch (error) {
     console.log("Error getting events ", error);
@@ -44,6 +62,12 @@ function* fetchMeeting(action) {
 // the registration triggers a login
 // and login triggers setting the user
 export default function* rootSaga() {
+  yield takeEvery("FETCH_MEETINGS", fetchMeeting);
+  yield takeEvery("FETCH_EVENT_MAIN", fetchEventMain);
+  yield takeEvery("FETCH_EVENT", fetchEvent);
+  yield takeEvery("FETCH_NOTES", fetchNotes);
+  yield takeEvery("ADD_NOTE", addNotes);
+  yield takeEvery("FETCH_CONTACT", fetchContact);
   yield all([
     loginSaga(),
     registrationSaga(),
