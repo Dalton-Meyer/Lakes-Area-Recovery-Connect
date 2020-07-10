@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import LogOutButton from '../LogOutButton/LogOutButton';
-import {Avatar, SelectMenu, Button, Pane} from 'evergreen-ui'
+import { Avatar, SelectMenu, Button, Pane } from 'evergreen-ui'
 import './Nav.css';
 
 
@@ -27,32 +27,32 @@ const Nav = (props) => (
       <Link className="nav-link" to="/about">
         ABOUT
       </Link>
-  
-        {/* Show this link if they are logged in or not,
+
+      {/* Show this link if they are logged in or not,
         but call this link 'Home' if they are logged in,
         and call this link 'Login / Register' if they are not */}
-        {/* {props.user.id ? `${props.user.username}` : 'Login / Register'}
+      {/* {props.user.id ? `${props.user.username}` : 'Login / Register'}
       </Link> */}
       {/* Show the link to the info page and the logout button if the user is logged in */}
-      {props.user.id ?  
+      {props.user.id ?
         <>
-             <SelectMenu
-   title="Menu"
-   options={[]}
-   emptyView={({ close }) => (
-     <Pane className='dropDown' height="100%" >
-       <Link to='/reading'><Button width="100%">Daily Reading</Button></Link>
-       <Link to='/notes'><Button width="100%">Notes</Button></Link>
-       <Link to='/home'><Button width="100%">Settings</Button></Link>
-       <Button onClick={close}>Close</Button>
-       <LogOutButton className="log-in" />
-     </Pane>
-   )}
- >
-      <Avatar isSolid color='green' name= {props.user.username} size={40}/>
-      </SelectMenu>
+          <SelectMenu
+            height={200}
+            title="Menu"
+            options={[]}
+            emptyView={({ close }) => (
+              <Pane className='dropDown'  >
+                <Link to='/reading'><Button width="100%">Daily Reading</Button></Link>
+                <Link to='/notes'><Button width="100%">Notes</Button></Link>
+                <Link to='/home'><Button width="100%">Settings</Button></Link>
+                <LogOutButton className="log-in" />
+              </Pane>
+            )}
+          >
+            <Avatar cursor='pointer' margin={10} isSolid color='green' name={props.user.username} size={40} />
+          </SelectMenu>
         </>
-      : <Link className='nav-link' to='/login'>Login/Register</Link>}
+        : <Link className='nav-link' to='/login'>Login/Register</Link>}
       {/* Always show this link since the about page is not protected */}
     </div>
   </div>

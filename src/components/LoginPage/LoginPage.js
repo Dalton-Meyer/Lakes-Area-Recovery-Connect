@@ -20,7 +20,7 @@ class LoginPage extends Component {
           password: this.state.password,
         },
       });
-      this.setState({redirect: true})
+      this.setState({ redirect: true })
     } else {
       this.props.dispatch({ type: 'LOGIN_INPUT_ERROR' });
     }
@@ -34,7 +34,7 @@ class LoginPage extends Component {
 
   renderRedirect = () => {
     if (this.state.redirect) {
-      return <Redirect to = "/home" />
+      return <Redirect to="/home" />
     }
   }
 
@@ -84,10 +84,10 @@ class LoginPage extends Component {
           </div>
         </form>
         <center>
-        <NavLink to='/register'>  <button
+          <NavLink to='/register'>  <button
             type="button"
             className="link-button"
-            onClick={() => {this.props.dispatch({type: 'SET_TO_REGISTER_MODE'})}}
+            onClick={() => { this.props.dispatch({ type: 'SET_TO_REGISTER_MODE' }) }}
           >
             Register
           </button>

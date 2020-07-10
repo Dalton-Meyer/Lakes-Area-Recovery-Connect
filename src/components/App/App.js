@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {
   HashRouter as Router,
   Route,
@@ -6,7 +6,7 @@ import {
   Switch,
 } from 'react-router-dom';
 
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
@@ -28,8 +28,8 @@ import './App.css';
 import EventsPage from '../EventsPage/EventsPage';
 
 class App extends Component {
-  componentDidMount () {
-    this.props.dispatch({type: 'FETCH_USER'})
+  componentDidMount() {
+    this.props.dispatch({ type: 'FETCH_USER' })
   }
 
   render() {
@@ -62,7 +62,7 @@ class App extends Component {
               path='/home'
               component={HomePage}
             />
-             <Route
+            <Route
               exact
               path='/meetings'
               component={MeetingPage}
@@ -77,7 +77,7 @@ class App extends Component {
               path='/contact'
               component={ContactPage}
             />
-            
+
             {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/home will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the 'Login' or 'Register' page.
@@ -94,7 +94,7 @@ class App extends Component {
               path="/reading"
               component={ReadingPage}
             />
-               <ProtectedRoute
+            <ProtectedRoute
               exact
               path="/notes"
               component={NotesPage}
@@ -105,7 +105,8 @@ class App extends Component {
           <Footer />
         </div>
       </Router>
-  )}
+    )
+  }
 }
 
 export default connect()(App);
