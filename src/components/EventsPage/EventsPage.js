@@ -63,7 +63,6 @@ class Events extends Component {
                                 <option value="3">Other</option>
                             </Select>
                             <Button margin={10} appearance="primary" iconBefore="download">Submit</Button>
-                            
                             <Table>
                                 <Table.Head>
                                     <Table.TextHeaderCell>
