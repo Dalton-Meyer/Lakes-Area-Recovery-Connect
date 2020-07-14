@@ -74,6 +74,7 @@ class Notes extends Component {
                             onChange={e => this.setState({ note: e.target.value })}
                         />
                         <br />
+                        {console.log(this.state)}
                         <br />
                         {this.state.isShown ? <> <Button onClick={() => this.setState({ isShown: false, note: '', title: '' })}>Cancel</Button> <Button appearance="danger" intent="danger" iconBefore="download" onClick={this.Edit}>Submit</Button> </> : <Button appearance="primary" iconBefore="download" onClick={this.Submit}>Submit</Button>}
                         {/* <Button appearance="primary" iconBefore="download" onClick={this.Edit}>Submit</Button>

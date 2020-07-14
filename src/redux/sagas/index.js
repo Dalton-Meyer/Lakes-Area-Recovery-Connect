@@ -49,12 +49,24 @@ function* deleteNotes(action) {
 } 
 function* fetchEvent(action) {
   try {
+  
     const response = yield axios.get("/api/event");
     yield put({ type: "SET_EVENT", payload: response.data });
   } catch (error) {
     console.log("Error getting events ", error);
   }
 } 
+function* addEvent(action) {
+  try {
+    console.log(action.payload)
+    yield axios.post("/api/event", action.payload)
+    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    yield put({ type: "FETCH_EVENT"});
+  } catch (error) {
+    console.log("Error adding events ", error);
+  }
+} 
+
 function* fetchEventMain(action) {
   try {
     const response = yield axios.get("/api/event/main");
@@ -83,6 +95,7 @@ export default function* rootSaga() {
   yield takeEvery("FETCH_MEETINGS", fetchMeeting);
   yield takeEvery("FETCH_EVENT_MAIN", fetchEventMain);
   yield takeEvery("FETCH_EVENT", fetchEvent);
+  yield takeEvery("ADD_EVENT", addEvent);
   yield takeEvery("FETCH_NOTES", fetchNotes);
   yield takeEvery("ADD_NOTE", addNotes);
   yield takeEvery("FETCH_CONTACT", fetchContact);

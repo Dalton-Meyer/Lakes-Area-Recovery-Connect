@@ -13,11 +13,13 @@ class Events extends Component {
         type: 1,
         date: '',
         time: '',
-        user: '',
+       
+        
     }
-    componentDidMount() {
-        this.setState({ user: this.props.user.user_access })
+    
 
+    Submit = () => {
+        this.props.dispatch({type: "ADD_EVENT", payload: this.state})
     }
     render() {
         return (
@@ -52,6 +54,7 @@ class Events extends Component {
                                 value={this.state.date}
                                 type="date"
                             />
+                            {console.log(this.state)}
                             <TextInput
                                 onChange={e => this.setState({ time: e.target.value })}
                                 value={this.state.time}
@@ -62,7 +65,7 @@ class Events extends Component {
                                 <option value="2">NA</option>
                                 <option value="3">Other</option>
                             </Select>
-                            <Button margin={10} appearance="primary" iconBefore="download">Submit</Button>
+                            <Button margin={10} appearance="primary" iconBefore="download" onClick={()=>this.Submit()}>Submit</Button>
                             <Table>
                                 <Table.Head>
                                     <Table.TextHeaderCell>
