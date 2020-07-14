@@ -1,15 +1,47 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Pane, TextInput, Table, Textarea, Button } from "evergreen-ui"
+import { Pane, TextInput, Table, Textarea, Button, Icon, } from "evergreen-ui"
 import './NotesPage.css'
-
+import swal from 'sweetalert';
 
 // this is the header component that displays on every page
 
 class Notes extends Component {
     state = {
         note: '',
-        note_title: '',
+        title: '',
+        user: this.props.user.id,
+        editId: '',
+    }
+
+    componentDidMount() {
+
+        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    }
+    Edit = () => {
+        this.props.dispatch({ type: "EDIT_NOTE", payload: this.state })
+        this.setState({ isShown: false })
+        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    }
+    Delete = (id) => {
+        this.props.dispatch({ type: "DELETE_NOTE", payload: id })
+        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    }
+    Submit = () => {
+        this.props.dispatch({ type: "ADD_NOTE", payload: this.state })
+        this.setState({
+            note: '',
+            title: ''
+        })
+        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    }
+    View = () => {
+        swal({
+            title: "Good job!",
+            text: "You clicked the button!",
+            icon: "success",
+            button: "Aww yiss!",
+        });
     }
     render() {
         return (
@@ -29,7 +61,8 @@ class Notes extends Component {
                         <h1>Add Personal Note</h1>
                         <TextInput
                             placeholder='Note Title'
-                            onChange={e => this.setState({ note_title: e.target.value })}
+                            onChange={e => this.setState({ title: e.target.value })}
+                            value={this.state.title}
                         />
                         <br />
                         <Textarea
@@ -37,12 +70,14 @@ class Notes extends Component {
                             placeholder="Personal Note..."
                             width={500}
                             height={250}
+                            value={this.state.note}
                             onChange={e => this.setState({ note: e.target.value })}
                         />
                         <br />
                         <br />
-
-                        <Button appearance="primary" iconBefore="download">Submit</Button>
+                        {this.state.isShown ? <> <Button onClick={() => this.setState({ isShown: false, note: '', title: '' })}>Cancel</Button> <Button appearance="danger" intent="danger" iconBefore="download" onClick={this.Edit}>Submit</Button> </> : <Button appearance="primary" iconBefore="download" onClick={this.Submit}>Submit</Button>}
+                        {/* <Button appearance="primary" iconBefore="download" onClick={this.Edit}>Submit</Button>
+                        <Button appearance="primary" iconBefore="download" onClick={this.Submit}>Submit</Button> */}
                         <h2>Notes</h2>
                         <Table>
                             <Table.Head>
@@ -58,11 +93,23 @@ class Notes extends Component {
                                 <Table.TextHeaderCell>
                                     Remove
           </Table.TextHeaderCell>
+                                <Table.TextHeaderCell>
+                                    View
+          </Table.TextHeaderCell>
                             </Table.Head>
-                            <Table.Body>
-                                <Table.Row>
-
-                                </Table.Row>
+                            <Table.Body height={150}>
+                                {this.props.notes.map((el) => {
+                                    return (<>
+                                        <Table.Row>
+                                            <Table.TextCell>{el.title}</Table.TextCell>
+                                            <Table.TextCell>{el.date}</Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' intent="primary" icon='edit' onClick={() => this.setState({ title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' icon='expand-all' onClick={() => swal({ title: el.title, text: el.note })} /></Table.TextCell>
+                                        </Table.Row>
+                                    </>
+                                    )
+                                })}
                             </Table.Body>
                         </Table>
                     </div>
@@ -74,7 +121,8 @@ class Notes extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        user: state.user,
+        notes: state.note,
     }
 }
 export default connect(mapStateToProps)(Notes);

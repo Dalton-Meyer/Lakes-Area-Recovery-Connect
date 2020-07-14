@@ -4,16 +4,19 @@ const pool = require("../modules/pool");
 const router = express.Router();
 
 // start GET to /movies
-router.get("/", (req, res) => {
+router.get("/:town/:meeting", (req, res) => {
     const meet = req.body;
+    const town = req.params.town;
+    const meeting = req.params.meeting;
+    console.log(req.params.meeting)
   // setting query text to select all movies
   const queryText = `SELECT * FROM meeting 
   JOIN town ON location_id = town_id 
   JOIN Organization ON org_id = meeting_id 
   WHERE town_id = $1
-  WHERE org_id = $2`;
+  AND org_id = $2`;
   pool
-    .query(queryText)
+    .query(queryText, [town, meeting])
     .then((result) => {
       console.log('Success in getting movies!');
       res.send(result.rows); // send the result --> the movies

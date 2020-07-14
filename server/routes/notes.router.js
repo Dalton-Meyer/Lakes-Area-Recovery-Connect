@@ -1,15 +1,16 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const { route } = require("./user.router");
+const moment = require('moment');
 
 const router = express.Router();
 
 
-router.get("/", (req, res) => {
- 
-  const queryText = `SELECT * FROM Notes ORDER BY date ASC`;
+router.get("/:id", (req, res) => {
+  const id = req.params.id
+  const queryText = `SELECT * FROM notes WHERE user_id = $1  ORDER BY date ASC`;
   pool
-    .query(queryText)
+    .query(queryText, [id])
     .then((result) => {
       console.log('Success in getting notes!');
       res.send(result.rows);
@@ -21,23 +22,33 @@ router.get("/", (req, res) => {
 });
 
 router.post("/", (req,res) => {
-    const note = req.body
-    const queryText = `INSERT INTO Notes(user_id, note, note_title, date)
+    const info = req.body
+    const user = info.user;
+    const note = info.note;
+    const title = info.title;
+    console.log(info)
+    const queryText = `INSERT INTO notes(user_id, note, title, date)
     VALUES ($1, $2, $3, $4)`
-    pool.query(queryText, [])
+    pool.query(queryText, [user, note, title, moment()])
     .then((result) => {console.log(`Success in adding note`)}).catch((error)=>{`problem with adding not ${error}`})
 })
 
+router.delete("/:id", (req,res) => {
+  const id = req.params.id
+  const queryText = `DELETE FROM notes WHERE id = $1`
+  pool.query(queryText, [id])
+  .then((result) => {console.log(`Success in deleting note`)}).catch((error)=>{`problem with deleting not ${error}`})
+})
+
 router.put("/", (req, res) => {
-    const note = req.body;
+    const info = req.body;
     
-    const queryText = `UPDATE Notes SET title=$1, description=$2 WHERE id=$3`;
+    const queryText = `UPDATE notes SET title=$1, note=$2 WHERE id=$3`;
     console.log(req.body)
     pool
-      .query(queryText, [note.title, note.note, note.id])
+      .query(queryText, [info.title, info.note, info.editId])
       .then((result) => {
         console.log("Success in updating note!");
-        res.send(result.rows); 
       })
       .catch((error) => {
         console.log(`Error on PUT with query ${error}`);

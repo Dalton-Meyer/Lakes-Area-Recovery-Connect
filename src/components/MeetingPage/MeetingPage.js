@@ -9,8 +9,16 @@ import './MeetingPage.css'
 class Meeting extends Component {
     state = {
         town: 1,
-        meeting: 1,
+        meeting: 2,
     }
+
+    componentDidMount(){
+        this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
+    }
+    componentDidUpdate(){
+        this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
+    }
+    
     render() {
         return (
             <Pane
@@ -60,10 +68,17 @@ class Meeting extends Component {
                             Location
           </Table.TextHeaderCell>
                     </Table.Head>
-                    <Table.Body>
-                        <Table.Row>
-
-                        </Table.Row>
+                    <Table.Body height={350}>
+                        {this.props.meeting.map((el)=>{
+                            return(
+                                <Table.Row>
+                                    <Table.TextCell>{el.meeting_name}</Table.TextCell>
+                                    <Table.TextCell>{el.meeting_day}</Table.TextCell>
+                                    <Table.TextCell>{el.meeting_time}</Table.TextCell>
+                                    <Table.TextCell>{el.meeting_address}, {el.City}</Table.TextCell>
+                                </Table.Row>
+                            )
+                        })}
                     </Table.Body>
                 </Table>
             </div>
@@ -75,7 +90,7 @@ class Meeting extends Component {
 
 const mapStateToProps = (state) => {
     return {
-
+        meeting: state.meeting,
     }
 }
 export default connect(mapStateToProps)(Meeting);

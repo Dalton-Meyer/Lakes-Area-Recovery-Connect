@@ -14,7 +14,7 @@ function* fetchContact(action) {
 } 
 function* fetchNotes(action) {
   try {
-    const response = yield axios.get("/api/notes");
+    const response = yield axios.get(`/api/notes/${action.payload}`);
     yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
@@ -22,9 +22,27 @@ function* fetchNotes(action) {
 } 
 function* addNotes(action) {
   try {
+    yield axios.post("/api/notes", action.payload)
+    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    yield put({ type: "FETCH_NOTES", payload: action.payload.user});
+  } catch (error) {
+    console.log("Error getting notes ", error);
+  }
+} 
+function* editNotes(action) {
+  try {
     yield axios.put("/api/notes", action.payload)
-    const response = yield axios.get("/api/notes");
-    yield put({ type: "SET_NOTE", payload: response.data });
+    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    // yield put({ type: "FETCH_NOTES", payload: action.payload.user});
+  } catch (error) {
+    console.log("Error getting notes ", error);
+  }
+} 
+function* deleteNotes(action) {
+  try {
+    yield axios.delete(`/api/notes/${action.payload}`)
+    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    // yield put({ type: "FETCH_NOTES", payload: action.payload.user});
   } catch (error) {
     console.log("Error getting notes ", error);
   }
@@ -47,7 +65,7 @@ function* fetchEventMain(action) {
 } 
 function* fetchMeeting(action) {
   try {
-    const response = yield axios.get("/api/meeting");
+    const response = yield axios.get(`/api/meeting/${action.payload.town}/${action.payload.meeting}`);
     yield put({ type: "SET_MEETING", payload: response.data });
   } catch (error) {
     console.log("Error getting meetings ", error);
@@ -68,6 +86,8 @@ export default function* rootSaga() {
   yield takeEvery("FETCH_NOTES", fetchNotes);
   yield takeEvery("ADD_NOTE", addNotes);
   yield takeEvery("FETCH_CONTACT", fetchContact);
+  yield takeEvery("DELETE_NOTE", deleteNotes);
+  yield takeEvery("EDIT_NOTE", editNotes);
   yield all([
     loginSaga(),
     registrationSaga(),
