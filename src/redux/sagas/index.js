@@ -23,8 +23,8 @@ function* fetchNotes(action) {
 function* addNotes(action) {
   try {
     yield axios.post("/api/notes", action.payload)
-    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    yield put({ type: "FETCH_NOTES", payload: action.payload.user});
+    const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
   }
@@ -32,8 +32,8 @@ function* addNotes(action) {
 function* editNotes(action) {
   try {
     yield axios.put("/api/notes", action.payload)
-    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    // yield put({ type: "FETCH_NOTES", payload: action.payload.user});
+    const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
   }
@@ -41,8 +41,8 @@ function* editNotes(action) {
 function* deleteNotes(action) {
   try {
     yield axios.delete(`/api/notes/${action.payload}`)
-    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    // yield put({ type: "FETCH_NOTES", payload: action.payload.user});
+    const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
   }

@@ -26,11 +26,11 @@ router.post("/", (req,res) => {
   const name = event.name;
   const date = event.date;
   const time = event.time;
-  console.log(time)
+  console.log(req.body)
   const queryText = `INSERT INTO events(event_type, event_name, event_location, event_date, event_time)
   VALUES ($1, $2, $3, $4, $5)`
   pool.query(queryText, [type, name, location, date, time])
-  .then(() => {console.log(`Success in adding event`)}).catch((error)=>{`problem with adding event ${error}`})
+  .then(() => res.sendStatus(201)).catch((error)=>{`problem with adding event ${error}`})
 }) 
 
 router.get("/home", (req, res) => {

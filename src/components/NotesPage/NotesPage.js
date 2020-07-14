@@ -12,6 +12,7 @@ class Notes extends Component {
         title: '',
         user: this.props.user.id,
         editId: '',
+        isShown: false,
     }
 
     componentDidMount() {
@@ -104,7 +105,7 @@ class Notes extends Component {
                                         <Table.Row>
                                             <Table.TextCell>{el.title}</Table.TextCell>
                                             <Table.TextCell>{el.date}</Table.TextCell>
-                                            <Table.TextCell><Icon cursor='pointer' intent="primary" icon='edit' onClick={() => this.setState({ title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' intent="primary" icon='edit' onClick={() => this.setState({isShown: true, title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
                                             <Table.TextCell><Icon cursor='pointer' icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
                                             <Table.TextCell><Icon cursor='pointer' icon='expand-all' onClick={() => swal({ title: el.title, text: el.note })} /></Table.TextCell>
                                         </Table.Row>
