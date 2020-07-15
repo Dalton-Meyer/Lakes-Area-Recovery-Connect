@@ -33,7 +33,7 @@ class Events extends Component {
     }
     Delete = (id) => {
         this.props.dispatch({ type: "DELETE_EVENT", payload: id })
-        this.props.dispatch({type: "FETCH_EVENT"}) 
+
     }
     render() { 
         return (

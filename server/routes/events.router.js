@@ -51,7 +51,7 @@ router.get("/main", (req, res) => {
     const id = req.params.id
     const queryText = `DELETE FROM events WHERE id = $1`
     pool.query(queryText, [id])
-    .then((result) => {console.log(`Success in deleting event`)}).catch((error)=>{`problem with deleting event ${error}`})
+    .then((result) => {console.log(`Success in deleting event`), res.sendStatus(200)}).catch((error)=>{`problem with deleting event ${error}`})
   })
 
 
