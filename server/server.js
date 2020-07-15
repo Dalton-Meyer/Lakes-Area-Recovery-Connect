@@ -13,6 +13,7 @@ const userRouter = require('./routes/user.router');
 const notesRouter = require('./routes/notes.router')
 const eventsRouter = require('./routes/events.router');
 const meetingRouter = require('./routes/meetings.router');
+const contactRouter = require('./routes/contact.router')
 // Body parser middleware
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -29,7 +30,7 @@ app.use('/api/user', userRouter);
 app.use('/api/notes', notesRouter);
 app.use('/api/event', eventsRouter);
 app.use('/api/meeting', meetingRouter);
-
+app.use('/api/contact', contactRouter)
 // Serve static files
 app.use(express.static('build'));
 

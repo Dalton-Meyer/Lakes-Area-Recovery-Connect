@@ -30,14 +30,14 @@ router.post("/", (req,res) => {
     const queryText = `INSERT INTO notes(user_id, note, title, date)
     VALUES ($1, $2, $3, $4)`
     pool.query(queryText, [user, note, title, moment()])
-    .then((result) => {console.log(`Success in adding note`)}).catch((error)=>{`problem with adding not ${error}`})
+    .then((result) => {res.sendStatus(201)}).catch((error)=>{res.sendStatus(500)})
 })
 
 router.delete("/:id", (req,res) => {
   const id = req.params.id
   const queryText = `DELETE FROM notes WHERE id = $1`
   pool.query(queryText, [id])
-  .then((result) => {console.log(`Success in deleting note`)}).catch((error)=>{`problem with deleting not ${error}`})
+  .then((result) => {res.sendStatus(200), console.log(`Success in deleting note`)}).catch((error)=>{`problem with deleting not ${error}`})
 })
 
 router.put("/", (req, res) => {
@@ -48,6 +48,7 @@ router.put("/", (req, res) => {
     pool
       .query(queryText, [info.title, info.note, info.editId])
       .then((result) => {
+        res.sendStatus(200)
         console.log("Success in updating note!");
       })
       .catch((error) => {

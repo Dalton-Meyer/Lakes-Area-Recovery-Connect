@@ -1,10 +1,18 @@
 
-import React from 'react';
+import React, {Component} from 'react';
 import { connect } from 'react-redux';
 import { Pane, Text, Table } from 'evergreen-ui';
 import './HomePage.css'
+import moment from 'moment'
 
-const HomePage = (props) => (
+class HomePage extends Component{
+
+  componentDidMount(){
+    this.props.dispatch({type: "FETCH_EVENT_MAIN"})
+  }
+
+  render(){
+    return(
   <Pane
     width='100%'
     display="flex"
@@ -39,6 +47,9 @@ const HomePage = (props) => (
             <Table.TextHeaderCell>
               Event
           </Table.TextHeaderCell>
+          <Table.TextHeaderCell>
+              Group
+          </Table.TextHeaderCell>
             <Table.TextHeaderCell>
               Location
           </Table.TextHeaderCell>
@@ -47,18 +58,26 @@ const HomePage = (props) => (
           </Table.TextHeaderCell>
           </Table.Head>
           <Table.Body>
-            <Table.Row>
+          {this.props.event.map((el, index) => {
+                                    return (<div key={index}>
+                                        <Table.Row>
+                                            <Table.TextCell>{el.event_name}</Table.TextCell>
+                                            <Table.TextCell>{el.organization}</Table.TextCell>
+                                            <Table.TextCell>{el.event_location}</Table.TextCell>
+                                            <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
 
-            </Table.Row>
+                                        </Table.Row>
+                                        </div>)})}
           </Table.Body>
         </Table>
       </div>
     </Pane>
   </Pane>
-);
+    )}};
 
 const mapStateToProps = state => ({
   user: state.user,
+  event: state.event
 });
 
 export default connect(mapStateToProps)(HomePage);

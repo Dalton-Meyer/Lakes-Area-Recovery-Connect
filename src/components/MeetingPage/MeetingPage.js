@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Pane, Tab, Tablist, Select, Table } from "evergreen-ui"
 import './MeetingPage.css'
-
+import moment from 'moment'
 
 // this is the header component that displays on every page
 
@@ -74,7 +74,7 @@ class Meeting extends Component {
                                 <Table.Row>
                                     <Table.TextCell>{el.meeting_name}</Table.TextCell>
                                     <Table.TextCell>{el.meeting_day}</Table.TextCell>
-                                    <Table.TextCell>{el.meeting_time}</Table.TextCell>
+                                    <Table.TextCell>{moment(el.meeting_time, 'HH:mm').format('h:mm A')}</Table.TextCell>
                                     <Table.TextCell>{el.meeting_address}, {el.City}</Table.TextCell>
                                 </Table.Row>
                             )

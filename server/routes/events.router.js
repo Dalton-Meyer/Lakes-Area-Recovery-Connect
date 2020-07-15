@@ -33,9 +33,9 @@ router.post("/", (req,res) => {
   .then(() => console.log('hello'),res.sendStatus(201)).catch((error)=>{console.log(error)})
 }) 
 
-router.get("/home", (req, res) => {
+router.get("/main", (req, res) => {
 
-    const queryText = `SELECT * FROM event BY date ASC LIMIT 3`;
+    const queryText = `SELECT * FROM events JOIN organization ON org_id = event_type ORDER BY event_date ASC LIMIT 3`;
     pool
       .query(queryText)
       .then((result) => {
@@ -47,6 +47,12 @@ router.get("/home", (req, res) => {
         res.sendStatus(500); // if there is an error, send server error 500
       });
   });
+  router.delete("/:id", (req,res) => {
+    const id = req.params.id
+    const queryText = `DELETE FROM events WHERE id = $1`
+    pool.query(queryText, [id])
+    .then((result) => {console.log(`Success in deleting event`)}).catch((error)=>{`problem with deleting event ${error}`})
+  })
 
 
 

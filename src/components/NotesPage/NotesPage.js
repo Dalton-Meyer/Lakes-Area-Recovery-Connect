@@ -20,14 +20,25 @@ class Notes extends Component {
 
         this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
     }
+    
+    update = () => {
+        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    }
     Edit = () => {
         this.props.dispatch({ type: "EDIT_NOTE", payload: this.state })
         this.setState({ isShown: false })
-        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+        this.setState({
+            note: '',
+            title: ''
+        })
     }
-    Delete = (id) => {
-        this.props.dispatch({ type: "DELETE_NOTE", payload: id })
-        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+    Delete = (id, user) => {
+        const info = {
+            id: id,
+            user: user
+        }
+        this.props.dispatch({ type: "DELETE_NOTE", payload: info })
+       
     }
     Submit = () => {
         this.props.dispatch({ type: "ADD_NOTE", payload: this.state })
@@ -35,16 +46,9 @@ class Notes extends Component {
             note: '',
             title: ''
         })
-        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+       
     }
-    View = () => {
-        swal({
-            title: "Good job!",
-            text: "You clicked the button!",
-            icon: "success",
-            button: "Aww yiss!",
-        });
-    }
+   
     render() {
         return (
             <Pane
@@ -71,12 +75,12 @@ class Notes extends Component {
                             name="textarea-1"
                             placeholder="Personal Note..."
                             width={500}
-                            height={250}
+                            height={200}
                             value={this.state.note}
                             onChange={e => this.setState({ note: e.target.value })}
                         />
                         <br />
-                        {console.log(this.state)}
+                        
                         <br />
                         {this.state.isShown ? <> <Button onClick={() => this.setState({ isShown: false, note: '', title: '' })}>Cancel</Button> <Button appearance="danger" intent="danger" iconBefore="download" onClick={this.Edit}>Submit</Button> </> : <Button appearance="primary" iconBefore="download" onClick={this.Submit}>Submit</Button>}
                         {/* <Button appearance="primary" iconBefore="download" onClick={this.Edit}>Submit</Button>
@@ -103,11 +107,12 @@ class Notes extends Component {
                             <Table.Body height={150}>
                                 {this.props.notes.map((el, index) => {
                                     return (<div key={index}>
+                                        
                                         <Table.Row >
                                             <Table.TextCell>{el.title}</Table.TextCell>
                                             <Table.TextCell>{moment(el.date).format('l')}</Table.TextCell>
                                             <Table.TextCell><Icon cursor='pointer' size={20} intent="primary" icon='edit' onClick={() => this.setState({isShown: true, title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
-                                            <Table.TextCell><Icon cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id, this.state.user)} /></Table.TextCell>
                                             <Table.TextCell><Icon cursor='pointer' size={20} icon='expand-all' onClick={() => swal({ title: el.title, text: el.note })} /></Table.TextCell>
                                         </Table.Row>
                                     </div>

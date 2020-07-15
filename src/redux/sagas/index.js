@@ -6,7 +6,7 @@ import axios from 'axios';
 
 function* fetchContact(action) {
   try {
-    const response = yield axios.get("/api/contact");
+    const response = yield axios.get(`/api/contact/${action.payload}`);
     yield put({ type: "SET_CONTACT", payload: response.data });
   } catch (error) {
     console.log("Error getting contacts ", error);
@@ -23,8 +23,8 @@ function* fetchNotes(action) {
 function* addNotes(action) {
   try {
     yield axios.post("/api/notes", action.payload)
-    const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    yield put({ type: "SET_NOTE", payload: response.data });
+    const response = yield axios.get(`/api/notes/${action.payload.user}`)
+    yield put({ type: "SET_NOTE", payload: response.data })
   } catch (error) {
     console.log("Error getting notes ", error);
   }
@@ -32,16 +32,17 @@ function* addNotes(action) {
 function* editNotes(action) {
   try {
     yield axios.put("/api/notes", action.payload)
-    const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    yield put({ type: "SET_NOTE", payload: response.data });
+    const response = yield axios.get(`/api/notes/${action.payload.user}`)
+    yield put({ type: "SET_NOTE", payload: response.data })
   } catch (error) {
     console.log("Error getting notes ", error);
   }
 } 
 function* deleteNotes(action) {
   try {
-    yield axios.delete(`/api/notes/${action.payload}`)
+    yield axios.delete(`/api/notes/${action.payload.id}`)
     const response = yield axios.get(`/api/notes/${action.payload.user}`);
+    {console.log('hello')}
     yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
@@ -58,12 +59,19 @@ function* fetchEvent(action) {
 } 
 function* addEvent(action) {
   try {
-    console.log(action.payload)
     yield axios.post("/api/event", action.payload)
-    // const response = yield axios.get(`/api/notes/${action.payload.user}`);
     yield put({ type: "FETCH_EVENT"});
   } catch (error) {
     console.log("Error adding events ", error);
+  }
+} 
+
+function* deleteEvent(action) {
+  try {
+    yield axios.delete(`/api/event/${action.payload}`)
+    yield put({ type: "FETCH_EVENT"});
+  } catch (error) {
+    console.log("Error getting notes ", error);
   }
 } 
 
@@ -96,6 +104,7 @@ export default function* rootSaga() {
   yield takeEvery("FETCH_EVENT_MAIN", fetchEventMain);
   yield takeEvery("FETCH_EVENT", fetchEvent);
   yield takeEvery("ADD_EVENT", addEvent);
+  yield takeEvery("DELETE_EVENT", deleteEvent);
   yield takeEvery("FETCH_NOTES", fetchNotes);
   yield takeEvery("ADD_NOTE", addNotes);
   yield takeEvery("FETCH_CONTACT", fetchContact);

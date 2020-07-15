@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Table, Pane, TextInput, Select, Button } from 'evergreen-ui'
+import { Table, Pane, TextInput, Select, Button, Icon } from 'evergreen-ui'
 import './EventsPage.css'
 import moment from "moment"
 
@@ -30,6 +30,10 @@ class Events extends Component {
             date: '',
             time: '',
         })
+    }
+    Delete = (id) => {
+        this.props.dispatch({ type: "DELETE_EVENT", payload: id })
+        this.props.dispatch({type: "FETCH_EVENT"}) 
     }
     render() { 
         return (
@@ -93,6 +97,9 @@ class Events extends Component {
                                     <Table.TextHeaderCell>
                                         Group
                                     </Table.TextHeaderCell>
+                                    <Table.TextHeaderCell>
+                                        Remove
+                                    </Table.TextHeaderCell>
                                 </Table.Head>
                                 <Table.Body>
                                 {this.props.event.map((el, index) => {
@@ -101,8 +108,9 @@ class Events extends Component {
                                             <Table.TextCell>{el.event_name}</Table.TextCell>
                                             <Table.TextCell>{el.event_location}</Table.TextCell>
                                             <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
-                                            <Table.TextCell>{moment(el.event_time).format('LT')} </Table.TextCell>
+                                            <Table.TextCell>{moment(el.event_time, 'HH:mm').format('h:mm A')} </Table.TextCell>
                                     <Table.TextCell>{el.organization}</Table.TextCell>
+                                    <Table.TextCell><Icon color="danger" cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
                                         </Table.Row>
                                         </div>)})}
                                 </Table.Body>
