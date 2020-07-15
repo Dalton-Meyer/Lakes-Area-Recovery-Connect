@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Pane, TextInput, Table, Textarea, Button, Icon, } from "evergreen-ui"
 import './NotesPage.css'
 import swal from 'sweetalert';
+import moment from 'moment'
 
 // this is the header component that displays on every page
 
@@ -100,16 +101,16 @@ class Notes extends Component {
           </Table.TextHeaderCell>
                             </Table.Head>
                             <Table.Body height={150}>
-                                {this.props.notes.map((el) => {
-                                    return (<>
-                                        <Table.Row>
+                                {this.props.notes.map((el, index) => {
+                                    return (<div key={index}>
+                                        <Table.Row >
                                             <Table.TextCell>{el.title}</Table.TextCell>
-                                            <Table.TextCell>{el.date}</Table.TextCell>
-                                            <Table.TextCell><Icon cursor='pointer' intent="primary" icon='edit' onClick={() => this.setState({isShown: true, title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
-                                            <Table.TextCell><Icon cursor='pointer' icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
-                                            <Table.TextCell><Icon cursor='pointer' icon='expand-all' onClick={() => swal({ title: el.title, text: el.note })} /></Table.TextCell>
+                                            <Table.TextCell>{moment(el.date).format('l')}</Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' size={20} intent="primary" icon='edit' onClick={() => this.setState({isShown: true, title: el.title, note: el.note, editId: el.id })} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
+                                            <Table.TextCell><Icon cursor='pointer' size={20} icon='expand-all' onClick={() => swal({ title: el.title, text: el.note })} /></Table.TextCell>
                                         </Table.Row>
-                                    </>
+                                    </div>
                                     )
                                 })}
                             </Table.Body>

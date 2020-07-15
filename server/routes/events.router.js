@@ -6,7 +6,7 @@ const router = express.Router();
 
 router.get("/", (req, res) => {
 
-  const queryText = `SELECT * FROM event BY date ASC`;
+  const queryText = `SELECT * FROM events JOIN organization ON org_id = event_type ORDER BY event_date ASC`;
   pool
     .query(queryText)
     .then((result) => {
@@ -30,7 +30,7 @@ router.post("/", (req,res) => {
   const queryText = `INSERT INTO events(event_type, event_name, event_location, event_date, event_time)
   VALUES ($1, $2, $3, $4, $5)`
   pool.query(queryText, [type, name, location, date, time])
-  .then(() => res.sendStatus(201)).catch((error)=>{`problem with adding event ${error}`})
+  .then(() => console.log('hello'),res.sendStatus(201)).catch((error)=>{console.log(error)})
 }) 
 
 router.get("/home", (req, res) => {

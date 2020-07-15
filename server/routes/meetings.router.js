@@ -9,7 +9,7 @@ router.get("/:town/:meeting", (req, res) => {
     const town = req.params.town;
     const meeting = req.params.meeting;
     console.log(req.params.meeting)
-  // setting query text to select all movies
+ 
   const queryText = `SELECT * FROM meeting 
   JOIN town ON location_id = town_id 
   JOIN Organization ON org_id = meeting_id 
@@ -18,15 +18,15 @@ router.get("/:town/:meeting", (req, res) => {
   pool
     .query(queryText, [town, meeting])
     .then((result) => {
-      console.log('Success in getting movies!');
-      res.send(result.rows); // send the result --> the movies
+      console.log('Success in getting meetings!');
+      res.send(result.rows); 
     })
     .catch((error) => {
       console.log(`Error on GET with query ${error}`);
-      res.sendStatus(500); // if there is an error, send server error 500
+      res.sendStatus(500); 
     });
 });
-// end GET to /movies
+
 
 
 module.exports = router;

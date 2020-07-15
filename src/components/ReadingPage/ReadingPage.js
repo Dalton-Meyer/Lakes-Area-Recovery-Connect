@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
-import { Pane, Tab, Tablist, Select, Table } from "evergreen-ui"
+import { Pane, Tab, Tablist } from "evergreen-ui"
 import './ReadingPage.css'
 import Iframe from "react-iframe"
 

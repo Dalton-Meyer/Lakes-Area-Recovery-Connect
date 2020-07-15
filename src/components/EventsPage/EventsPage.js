@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import { Table, Pane, TextInput, Select, Button } from 'evergreen-ui'
 import './EventsPage.css'
+import moment from "moment"
 
 
 // this is the header component that displays on every page
@@ -16,12 +17,21 @@ class Events extends Component {
        
         
     }
-    
+    componentDidMount(){
+        this.props.dispatch({type: "FETCH_EVENT"}) 
+    }
 
     Submit = () => {
         this.props.dispatch({type: "ADD_EVENT", payload: this.state})
+        this.setState({
+            name: '',
+            location: '',
+            type: 1,
+            date: '',
+            time: '',
+        })
     }
-    render() {
+    render() { 
         return (
             <Pane
                 width='100%'
@@ -85,9 +95,16 @@ class Events extends Component {
                                     </Table.TextHeaderCell>
                                 </Table.Head>
                                 <Table.Body>
-                                    <Table.Row>
-
-                                    </Table.Row>
+                                {this.props.event.map((el, index) => {
+                                    return (<div key={index}>
+                                        <Table.Row>
+                                            <Table.TextCell>{el.event_name}</Table.TextCell>
+                                            <Table.TextCell>{el.event_location}</Table.TextCell>
+                                            <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
+                                            <Table.TextCell>{moment(el.event_time).format('LT')} </Table.TextCell>
+                                    <Table.TextCell>{el.organization}</Table.TextCell>
+                                        </Table.Row>
+                                        </div>)})}
                                 </Table.Body>
                             </Table>
                         </div>
@@ -120,9 +137,16 @@ class Events extends Component {
                                     </Table.TextHeaderCell>
                                 </Table.Head>
                                 <Table.Body>
-                                    <Table.Row>
-
-                                    </Table.Row>
+                                {this.props.event.map((el, index) => {
+                                    return (<div key={index}>
+                                        <Table.Row>
+                                            <Table.TextCell>{el.event_name}</Table.TextCell>
+                                            <Table.TextCell>{el.event_location}</Table.TextCell>
+                                            <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
+                                            <Table.TextCell>{el.event_time} </Table.TextCell>
+                                    <Table.TextCell>{el.organization}</Table.TextCell>
+                                        </Table.Row>
+                                        </div>)})}
                                 </Table.Body>
                             </Table>
                         </div>
@@ -134,7 +158,8 @@ class Events extends Component {
 
 const mapStateToProps = (state) => {
     return {
-        user: state.user
+        user: state.user,
+        event: state.event
     }
 }
 export default connect(mapStateToProps)(Events);
