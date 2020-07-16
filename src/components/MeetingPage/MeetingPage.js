@@ -15,9 +15,38 @@ class Meeting extends Component {
     componentDidMount(){
         this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
     }
-    componentDidUpdate(){
-        this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
+    // componentDidUpdate(){
+    //     this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
+    // }
+    town = (event) => {
+       let newState = {
+            town: event.target.value,
+            meeting: this.state.meeting
+        }
+        this.props.dispatch({type: "FETCH_MEETINGS", payload: newState})
+        this.setState({town: event.target.value})
     }
+
+    meeting = (param) => {
+        let newState = {}
+        if(param === 1){
+        newState = {
+            town: this.state.town,
+            meeting: 1
+        }
+        this.setState({meeting: 1})
+    }else if (param === 2){
+        newState = {
+            town: this.state.town,
+            meeting: 2
+        }
+        this.setState({meeting: 2})
+    } 
+        this.props.dispatch({type: "FETCH_MEETINGS", payload: newState})
+       
+    }
+    
+        
     
     render() {
         return (
@@ -37,15 +66,15 @@ class Meeting extends Component {
                 <h1>Meeting List</h1>
                 <Pane height={120}>
                     <Tablist marginBottom={16} flexBasis={240} marginRight={24}>
-                        <Tab id='AA' onSelect={() => this.setState({ meeting: 1 })} isSelected={1 === this.state.meeting}>
+                        <Tab id='AA' onSelect={() => this.meeting(1)} isSelected={1 === this.state.meeting}>
                             AA
                 </Tab>
                 ||
-                <Tab id='NA' onSelect={() => this.setState({ meeting: 2 })} isSelected={2 === this.state.meeting}>
+                <Tab id='NA' onSelect={() => this.meeting(2)} isSelected={2 === this.state.meeting}>
                             NA
                 </Tab>
                     </Tablist>
-                    <Select width={200} value={this.state.town} onChange={event => this.setState({ town: event.target.value })}>
+                    <Select width={200} value={this.state.town} onChange={event => this.town(event)}>
                         <option value="1" defaultValue>Detroit Lakes</option>
                         <option value="2">Perham</option>
                         <option value="3">Frazee</option>

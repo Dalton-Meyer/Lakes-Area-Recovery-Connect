@@ -15,9 +15,18 @@ class Contact extends Component {
     ],
     value: '',
   }
-  componentDidUpdate(){
+  componentWillMount(){
+    this.setState({value: 'help'})
+    
+  }
+  componentDidMount(){
     this.props.dispatch({type: "FETCH_CONTACT", payload: this.state.value})
   }
+  update = (value) => {
+    this.setState({ value })
+    this.props.dispatch({type: "FETCH_CONTACT", payload:value})
+  }
+  
   
 
   render() {
@@ -40,13 +49,15 @@ class Contact extends Component {
             <h1>Contacts</h1>
             </Pane>
             {console.log(this.state)}
+            
             <SegmentedControl
               margin={25}
               width={550}
               height={50}
               options={this.state.options}
               value={this.state.value}
-              onChange={value => this.setState({ value })}
+              onChange={(value) => this.update(value)}
+              
             />
             <Table>
               <Table.Head>
