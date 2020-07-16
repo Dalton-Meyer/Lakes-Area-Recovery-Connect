@@ -31,13 +31,35 @@ class Notes extends Component {
             note: '',
             title: ''
         })
+        swal({
+            title: "Thanks!",
+            text: "Your note has been updated",
+            icon: "success",
+          });
     }
     Delete = (id, user) => {
         const info = {
             id: id,
             user: user
         }
-        this.props.dispatch({ type: "DELETE_NOTE", payload: info })
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this note!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                this.props.dispatch({ type: "DELETE_NOTE", payload: info })
+              swal("Your note has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your note is safe!");
+            }
+          });
+        
        
     }
     Submit = () => {
@@ -46,6 +68,11 @@ class Notes extends Component {
             note: '',
             title: ''
         })
+        swal({
+            title: "Thanks!",
+            text: "You added a new note!",
+            icon: "success",
+          });
        
     }
    

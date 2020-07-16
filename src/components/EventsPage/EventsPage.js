@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { Table, Pane, TextInput, Select, Button, Icon } from 'evergreen-ui'
 import './EventsPage.css'
 import moment from "moment"
+import swal from 'sweetalert'
 
 
 // this is the header component that displays on every page
@@ -30,9 +31,30 @@ class Events extends Component {
             date: '',
             time: '',
         })
+        swal({
+            title: "Thanks!",
+            text: "You added a new note!",
+            icon: "success",
+          });
     }
     Delete = (id) => {
-        this.props.dispatch({ type: "DELETE_EVENT", payload: id })
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this event!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                this.props.dispatch({ type: "DELETE_EVENT", payload: id })
+              swal("Your event has been deleted!", {
+                icon: "success",
+              });
+            } else {
+              swal("Your event is safe!");
+            }
+          });
 
     }
     render() { 
