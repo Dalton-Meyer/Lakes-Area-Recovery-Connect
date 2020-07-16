@@ -26,12 +26,12 @@ class HomePage extends Component{
       justifyContent="center"
       border="default">
       <div className='homePage'>
-        <h1>Lakes Area Recovery Connect</h1>
+        
         <br />
         <Pane
           elevation={3}
           float="center"
-          width={500}
+          width={600}
           height={250}
           margin={30}
           display="flex"
@@ -39,6 +39,8 @@ class HomePage extends Component{
           alignItems="center"
           flexDirection="column"
         >
+          <h1>Lakes Area Recovery Connect</h1>
+          <hr/>
           <Text size={600}>Helping people in recovery around the Lakes Area stay organized and connected with their community.</Text>
         </Pane>
         <h2>Upcoming Events</h2>

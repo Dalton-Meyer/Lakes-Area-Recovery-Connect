@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
-import Nav from '../Nav/Nav';
+
 class LoginPage extends Component {
   state = {
     username: '',

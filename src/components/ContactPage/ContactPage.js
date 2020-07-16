@@ -15,19 +15,19 @@ class Contact extends Component {
     ],
     value: '',
   }
-  componentWillMount(){
-    this.setState({value: 'help'})
-    
+  componentWillMount() {
+    this.setState({ value: 'help' })
+
   }
-  componentDidMount(){
-    this.props.dispatch({type: "FETCH_CONTACT", payload: this.state.value})
+  componentDidMount() {
+    this.props.dispatch({ type: "FETCH_CONTACT", payload: this.state.value })
   }
   update = (value) => {
     this.setState({ value })
-    this.props.dispatch({type: "FETCH_CONTACT", payload:value})
+    this.props.dispatch({ type: "FETCH_CONTACT", payload: value })
   }
-  
-  
+
+
 
   render() {
     return (
@@ -45,11 +45,7 @@ class Contact extends Component {
           flex-direction="column"
           border="default">
           <div className='contacts'>
-            <Pane elevation={3}>
             <h1>Contacts</h1>
-            </Pane>
-            {console.log(this.state)}
-            
             <SegmentedControl
               margin={25}
               width={550}
@@ -57,7 +53,6 @@ class Contact extends Component {
               options={this.state.options}
               value={this.state.value}
               onChange={(value) => this.update(value)}
-              
             />
             <Table>
               <Table.Head>
@@ -69,12 +64,12 @@ class Contact extends Component {
                 </Table.TextHeaderCell>
               </Table.Head>
               <Table.Body>
-                {this.props.contact.map((el, index)=>{
-                  return(
+                {this.props.contact.map((el, index) => {
+                  return (
                     <Table.Row key={index}>
-                  <Table.TextCell className='contactName'>{el.contact_name}</Table.TextCell>
-                  <Table.TextCell className='contactPhone'>{el.contact_phone}</Table.TextCell>
-                  </Table.Row>
+                      <Table.TextCell className='contactName'>{el.contact_name}</Table.TextCell>
+                      <Table.TextCell className='contactPhone'>{el.contact_phone}</Table.TextCell>
+                    </Table.Row>
                   )
                 })}
               </Table.Body>

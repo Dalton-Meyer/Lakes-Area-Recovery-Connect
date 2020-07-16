@@ -15,15 +15,15 @@ class Events extends Component {
         type: 1,
         date: '',
         time: '',
-       
-        
+
+
     }
-    componentDidMount(){
-        this.props.dispatch({type: "FETCH_EVENT"}) 
+    componentDidMount() {
+        this.props.dispatch({ type: "FETCH_EVENT" })
     }
 
     Submit = () => {
-        this.props.dispatch({type: "ADD_EVENT", payload: this.state})
+        this.props.dispatch({ type: "ADD_EVENT", payload: this.state })
         this.setState({
             name: '',
             location: '',
@@ -35,7 +35,7 @@ class Events extends Component {
             title: "Thanks!",
             text: "You added a new note!",
             icon: "success",
-          });
+        });
     }
     Delete = (id) => {
         swal({
@@ -44,20 +44,20 @@ class Events extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                this.props.dispatch({ type: "DELETE_EVENT", payload: id })
-              swal("Your event has been deleted!", {
-                icon: "success",
-              });
-            } else {
-              swal("Your event is safe!");
-            }
-          });
+        })
+            .then((willDelete) => {
+                if (willDelete) {
+                    this.props.dispatch({ type: "DELETE_EVENT", payload: id })
+                    swal("Your event has been deleted!", {
+                        icon: "success",
+                    });
+                } else {
+                    swal("Your event is safe!");
+                }
+            });
 
     }
-    render() { 
+    render() {
         return (
             <Pane
                 width='100%'
@@ -101,7 +101,7 @@ class Events extends Component {
                                 <option value="2">NA</option>
                                 <option value="3">Other</option>
                             </Select>
-                            <Button margin={10} appearance="primary" iconBefore="download" onClick={()=>this.Submit()}>Submit</Button>
+                            <Button margin={10} appearance="primary" iconBefore="download" onClick={() => this.Submit()}>Submit</Button>
                             <Table>
                                 <Table.Head>
                                     <Table.TextHeaderCell>
@@ -124,17 +124,18 @@ class Events extends Component {
                                     </Table.TextHeaderCell>
                                 </Table.Head>
                                 <Table.Body>
-                                {this.props.event.map((el, index) => {
-                                    return (<div key={index}>
-                                        <Table.Row>
-                                            <Table.TextCell>{el.event_name}</Table.TextCell>
-                                            <Table.TextCell>{el.event_location}</Table.TextCell>
-                                            <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
-                                            <Table.TextCell>{moment(el.event_time, 'HH:mm').format('h:mm A')} </Table.TextCell>
-                                    <Table.TextCell>{el.organization}</Table.TextCell>
-                                    <Table.TextCell><Icon color="danger" cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
-                                        </Table.Row>
-                                        </div>)})}
+                                    {this.props.event.map((el, index) => {
+                                        return (<div key={index}>
+                                            <Table.Row>
+                                                <Table.TextCell>{el.event_name}</Table.TextCell>
+                                                <Table.TextCell>{el.event_location}</Table.TextCell>
+                                                <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
+                                                <Table.TextCell>{moment(el.event_time, 'HH:mm').format('h:mm A')} </Table.TextCell>
+                                                <Table.TextCell>{el.organization}</Table.TextCell>
+                                                <Table.TextCell><Icon color="danger" cursor='pointer' size={20} icon='delete' onClick={() => this.Delete(el.id)} /></Table.TextCell>
+                                            </Table.Row>
+                                        </div>)
+                                    })}
                                 </Table.Body>
                             </Table>
                         </div>
@@ -159,7 +160,7 @@ class Events extends Component {
                                     <Table.TextHeaderCell>
                                         Date
                                 </Table.TextHeaderCell>
-                                <Table.TextHeaderCell>
+                                    <Table.TextHeaderCell>
                                         Time
                                     </Table.TextHeaderCell>
                                     <Table.TextHeaderCell>
@@ -167,16 +168,17 @@ class Events extends Component {
                                     </Table.TextHeaderCell>
                                 </Table.Head>
                                 <Table.Body>
-                                {this.props.event.map((el, index) => {
-                                    return (<div key={index}>
-                                        <Table.Row>
-                                            <Table.TextCell>{el.event_name}</Table.TextCell>
-                                            <Table.TextCell>{el.event_location}</Table.TextCell>
-                                            <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
-                                            <Table.TextCell>{el.event_time} </Table.TextCell>
-                                    <Table.TextCell>{el.organization}</Table.TextCell>
-                                        </Table.Row>
-                                        </div>)})}
+                                    {this.props.event.map((el, index) => {
+                                        return (<div key={index}>
+                                            <Table.Row>
+                                                <Table.TextCell>{el.event_name}</Table.TextCell>
+                                                <Table.TextCell>{el.event_location}</Table.TextCell>
+                                                <Table.TextCell>{moment(el.event_date).format('l')}</Table.TextCell>
+                                                <Table.TextCell>{el.event_time} </Table.TextCell>
+                                                <Table.TextCell>{el.organization}</Table.TextCell>
+                                            </Table.Row>
+                                        </div>)
+                                    })}
                                 </Table.Body>
                             </Table>
                         </div>

@@ -42,7 +42,6 @@ function* deleteNotes(action) {
   try {
     yield axios.delete(`/api/notes/${action.payload.id}`)
     const response = yield axios.get(`/api/notes/${action.payload.user}`);
-    {console.log('hello')}
     yield put({ type: "SET_NOTE", payload: response.data });
   } catch (error) {
     console.log("Error getting notes ", error);
