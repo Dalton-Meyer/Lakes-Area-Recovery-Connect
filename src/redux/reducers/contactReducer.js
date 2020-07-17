@@ -7,6 +7,6 @@ const contactReducer = (state = [], action) => {
     }
   };
   
-  // user will be on the redux state at:
-  // state.user
+  // contact will be on the redux state at:
+  // state.contact
   export default contactReducer;

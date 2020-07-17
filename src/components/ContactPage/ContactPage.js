@@ -4,7 +4,6 @@ import { SegmentedControl, Pane, Table } from "evergreen-ui";
 import './ContactPage.css'
 
 
-// this is the header component that displays on every page
 
 class Contact extends Component {
   state = {
@@ -17,14 +16,17 @@ class Contact extends Component {
   }
   componentWillMount() {
     this.setState({ value: 'help' })
-
+    // before page loads it sets the value in state to help
   }
   componentDidMount() {
     this.props.dispatch({ type: "FETCH_CONTACT", payload: this.state.value })
+    // when page loads it sends a dispatch to fetch contact list from server with
+    // the value of help grabbing all the helpline numbers
   }
   update = (value) => {
     this.setState({ value })
     this.props.dispatch({ type: "FETCH_CONTACT", payload: value })
+    // when new segment is click sets state.value to the new value and sends a dispatch out to the server
   }
 
 
@@ -84,6 +86,6 @@ class Contact extends Component {
 const mapStateToProps = (state) => {
   return {
     contact: state.contact,
-  }
+  }// brings in contact global state from redux
 }
 export default connect(mapStateToProps)(Contact);

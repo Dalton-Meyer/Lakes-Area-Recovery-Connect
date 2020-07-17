@@ -4,7 +4,8 @@ import registrationSaga from './registrationSaga';
 import userSaga from './userSaga';
 import axios from 'axios';
 
-function* fetchContact(action) {
+// grabs all the contacts for the contact type you have selected
+function* fetchContact(action) { 
   try {
     const response = yield axios.get(`/api/contact/${action.payload}`);
     yield put({ type: "SET_CONTACT", payload: response.data });
@@ -12,6 +13,7 @@ function* fetchContact(action) {
     console.log("Error getting contacts ", error);
   }
 } 
+// grabs all notes for the currents user that is logged in
 function* fetchNotes(action) {
   try {
     const response = yield axios.get(`/api/notes/${action.payload}`);
@@ -20,6 +22,7 @@ function* fetchNotes(action) {
     console.log("Error getting notes ", error);
   }
 } 
+// sends off the post request for new note and brings back all the information once it is done
 function* addNotes(action) {
   try {
     yield axios.post("/api/notes", action.payload)
@@ -29,6 +32,8 @@ function* addNotes(action) {
     console.log("Error getting notes ", error);
   }
 } 
+// sends off the put request to change the information of one of the notes in database
+// then returns with all the info 
 function* editNotes(action) {
   try {
     yield axios.put("/api/notes", action.payload)
@@ -38,6 +43,7 @@ function* editNotes(action) {
     console.log("Error getting notes ", error);
   }
 } 
+// deletes selected note from server then comes back with a updated list of current notes
 function* deleteNotes(action) {
   try {
     yield axios.delete(`/api/notes/${action.payload.id}`)
@@ -47,6 +53,7 @@ function* deleteNotes(action) {
     console.log("Error getting notes ", error);
   }
 } 
+// grabs all the events inside the database
 function* fetchEvent(action) {
   try {
   
@@ -56,6 +63,7 @@ function* fetchEvent(action) {
     console.log("Error getting events ", error);
   }
 } 
+// sends off a post request to add new event then updates the redux
 function* addEvent(action) {
   try {
     yield axios.post("/api/event", action.payload)
@@ -64,7 +72,7 @@ function* addEvent(action) {
     console.log("Error adding events ", error);
   }
 } 
-
+// deletes selected event from server then updates the redux
 function* deleteEvent(action) {
   try {
     yield axios.delete(`/api/event/${action.payload}`)
@@ -73,7 +81,7 @@ function* deleteEvent(action) {
     console.log("Error getting notes ", error);
   }
 } 
-
+// grabs the top 3 events happening the soonest
 function* fetchEventMain(action) {
   try {
     const response = yield axios.get("/api/event/main");
@@ -82,6 +90,7 @@ function* fetchEventMain(action) {
     console.log("Error getting events ", error);
   }
 } 
+// grabs meetings from database based on whats selected then updates the redux
 function* fetchMeeting(action) {
   try {
     const response = yield axios.get(`/api/meeting/${action.payload.town}/${action.payload.meeting}`);

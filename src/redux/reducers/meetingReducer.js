@@ -7,6 +7,6 @@ const meetingReducer = (state = [], action) => {
     }
   };
   
-  // user will be on the redux state at:
-  // state.user
+  // meeting will be on the redux state at:
+  // state.meeting
   export default meetingReducer;

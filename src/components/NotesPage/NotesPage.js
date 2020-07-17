@@ -5,7 +5,7 @@ import './NotesPage.css'
 import swal from 'sweetalert';
 import moment from 'moment'
 
-// this is the header component that displays on every page
+// this page only shows when you are logged in
 
 class Notes extends Component {
     state = {
@@ -17,14 +17,14 @@ class Notes extends Component {
     }
 
     componentDidMount() {
-
         this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
+        // grabs all the notes from database based on the user id of the person logged in
     }
     
-    update = () => {
-        this.props.dispatch({ type: "FETCH_NOTES", payload: this.state.user })
-    }
     Edit = () => {
+        // when edit is clicked it sets the state to the value of the note you clicked
+        // and pops up 2 new buttons if you hit cancel it will reset state and nothing will happen
+        // if you hit submit it will update the info in the database to the new info
         this.props.dispatch({ type: "EDIT_NOTE", payload: this.state })
         this.setState({ isShown: false })
         this.setState({
@@ -35,9 +35,11 @@ class Notes extends Component {
             title: "Thanks!",
             text: "Your note has been updated",
             icon: "success",
-          });
+          }); // lets you know new info has been submitted
     }
     Delete = (id, user) => {
+        // function takes the id of the note and sends off to the server to delete it
+        // also sends off user id to grab all the notes again once it is finished with delete
         const info = {
             id: id,
             user: user
@@ -48,7 +50,7 @@ class Notes extends Component {
             icon: "warning",
             buttons: true,
             dangerMode: true,
-          })
+          }) // conformation to make sure you really want to delete the note
           .then((willDelete) => {
             if (willDelete) {
                 this.props.dispatch({ type: "DELETE_NOTE", payload: info })
@@ -63,6 +65,7 @@ class Notes extends Component {
        
     }
     Submit = () => {
+        // sends off information in current state to add a new note to the database
         this.props.dispatch({ type: "ADD_NOTE", payload: this.state })
         this.setState({
             note: '',
@@ -72,7 +75,7 @@ class Notes extends Component {
             title: "Thanks!",
             text: "You added a new note!",
             icon: "success",
-          });
+          }); // lets you know it was sent off
        
     }
    
@@ -159,6 +162,6 @@ const mapStateToProps = (state) => {
     return {
         user: state.user,
         notes: state.note,
-    }
+    } // brings in user and notes info from global state
 }
 export default connect(mapStateToProps)(Notes);

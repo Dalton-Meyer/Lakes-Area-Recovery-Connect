@@ -9,6 +9,6 @@ const eventReducer = (state = [], action) => {
     }
   };
   
-  // user will be on the redux state at:
-  // state.user
+  // event will be on the redux state at:
+  // state.event
   export default eventReducer;

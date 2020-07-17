@@ -10,6 +10,7 @@ class HomePage extends Component{
   componentDidMount(){
     this.props.dispatch({type: "FETCH_EVENT_MAIN"})
   }
+  // grabs 3 events that will happen soon
 
   render(){
     return(
@@ -83,6 +84,6 @@ class HomePage extends Component{
 const mapStateToProps = state => ({
   user: state.user,
   event: state.event
-});
+}); // brings in user and event redux from global state
 
 export default connect(mapStateToProps)(HomePage);

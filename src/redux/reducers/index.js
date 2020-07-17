@@ -17,10 +17,10 @@ const rootReducer = combineReducers({
   errors, // contains registrationMessage and loginMessage
   loginMode, // will have a value of 'login' or 'registration' to control which screen is shown
   user, // will have an id and username if someone is logged in
-  contact,
-  event,
-  meeting,
-  note,
+  contact, // will contain all the information for the contacts
+  event, // will have all the info for events
+  meeting, // will have all the info depending on the town and meeting type you choose
+  note, // will contain all the logged in users personal notes
 });
 
 export default rootReducer;

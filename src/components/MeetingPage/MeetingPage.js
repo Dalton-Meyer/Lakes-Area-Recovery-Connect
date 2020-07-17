@@ -15,9 +15,8 @@ class Meeting extends Component {
     componentDidMount() {
         this.props.dispatch({ type: "FETCH_MEETINGS", payload: this.state })
     }
-    // componentDidUpdate(){
-    //     this.props.dispatch({type: "FETCH_MEETINGS", payload: this.state})
-    // }
+    // brings in the default meeting info when page is loaded
+   
     town = (event) => {
         let newState = {
             town: event.target.value,
@@ -25,7 +24,8 @@ class Meeting extends Component {
         }
         this.props.dispatch({ type: "FETCH_MEETINGS", payload: newState })
         this.setState({ town: event.target.value })
-    }
+    } // changes the state depending what town you click then the saga sends a new 
+    // get request for server and brings back the updated information
 
     meeting = (param) => {
         let newState = {}
@@ -45,6 +45,8 @@ class Meeting extends Component {
         this.props.dispatch({ type: "FETCH_MEETINGS", payload: newState })
 
     }
+    // changes the state depending what meeting type you click then the saga sends a new 
+    // get request for server and brings back the updated information
 
 
 
@@ -121,6 +123,6 @@ class Meeting extends Component {
 const mapStateToProps = (state) => {
     return {
         meeting: state.meeting,
-    }
+    } // brings in the meeting redux from global state
 }
 export default connect(mapStateToProps)(Meeting);

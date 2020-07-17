@@ -20,10 +20,13 @@ class Events extends Component {
     }
     componentDidMount() {
         this.props.dispatch({ type: "FETCH_EVENT" })
+        // grabs all events from server when page loads
     }
 
     Submit = () => {
         this.props.dispatch({ type: "ADD_EVENT", payload: this.state })
+        // sends the info inside the current state for a post request to the server adding a new event
+        // then reset the state back to blank
         this.setState({
             name: '',
             location: '',
@@ -31,13 +34,15 @@ class Events extends Component {
             date: '',
             time: '',
         })
+        // pops a sweetalert letting you know that you sent off the new event to be added to database
         swal({
             title: "Thanks!",
-            text: "You added a new note!",
+            text: "You added a new event!",
             icon: "success",
         });
     }
     Delete = (id) => {
+        // sweetalert pops up asking you to confirm if you want to delete a event form database
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this event!",
@@ -195,5 +200,6 @@ const mapStateToProps = (state) => {
         user: state.user,
         event: state.event
     }
+    // brings in user and event redux from global state
 }
 export default connect(mapStateToProps)(Events);

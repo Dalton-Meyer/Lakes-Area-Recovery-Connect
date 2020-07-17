@@ -7,6 +7,6 @@ const noteReducer = (state = [], action) => {
     }
   };
   
-  // user will be on the redux state at:
-  // state.user
+  // note will be on the redux state at:
+  // state.note
   export default noteReducer;
