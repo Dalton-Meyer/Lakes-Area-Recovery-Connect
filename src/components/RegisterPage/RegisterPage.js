@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import {Pane} from 'evergreen-ui'
+import './RegisterPage.css'
 class RegisterPage extends Component {
   state = {
     username: '',
@@ -31,7 +33,21 @@ class RegisterPage extends Component {
 
   render() {
     return (
-      <div>
+      <Pane
+        width='100%'
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        border="default">
+        <Pane
+        className='background'
+          width='70%'
+          height={800}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          border="default">
+      <div className='registerForm'>
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -85,6 +101,8 @@ class RegisterPage extends Component {
           </NavLink>
         </center>
       </div>
+      </Pane>
+      </Pane>
     );
   }
 }

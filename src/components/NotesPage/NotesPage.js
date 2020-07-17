@@ -85,6 +85,7 @@ class Notes extends Component {
                 justifyContent="center"
                 border="default">
                 <Pane
+                    className='background'
                     width='70%'
                     display="flex"
                     height={700}
@@ -113,23 +114,23 @@ class Notes extends Component {
                         {/* <Button appearance="primary" iconBefore="download" onClick={this.Edit}>Submit</Button>
                         <Button appearance="primary" iconBefore="download" onClick={this.Submit}>Submit</Button> */}
                         <h2>Notes</h2>
-                        <Table>
-                            <Table.Head>
+                        <Table className='table'>
+                            <Table.Head className='tableHead'>
                                 <Table.TextHeaderCell>
                                     Title
-          </Table.TextHeaderCell>
+                                </Table.TextHeaderCell>
                                 <Table.TextHeaderCell>
                                     Date
-          </Table.TextHeaderCell>
+                                </Table.TextHeaderCell>
                                 <Table.TextHeaderCell>
                                     Edit
-          </Table.TextHeaderCell>
+                                </Table.TextHeaderCell>
                                 <Table.TextHeaderCell>
                                     Remove
-          </Table.TextHeaderCell>
+                                </Table.TextHeaderCell>
                                 <Table.TextHeaderCell>
                                     View
-          </Table.TextHeaderCell>
+                                </Table.TextHeaderCell>
                             </Table.Head>
                             <Table.Body height={150}>
                                 {this.props.notes.map((el, index) => {

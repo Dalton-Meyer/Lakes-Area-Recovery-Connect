@@ -18,6 +18,7 @@ class AboutPage extends Component {
         justifyContent="center"
         border="default">
         <Pane
+        className='background'
           width='70%'
           height={800}
           display="flex"
@@ -29,6 +30,7 @@ class AboutPage extends Component {
             <br />
 
             <Pane
+              className='textPane'
               elevation={3}
               float="center"
               height={250}
@@ -47,6 +49,7 @@ class AboutPage extends Component {
            of places and people willing to help if you're going through a tough time. Thanks for checking out my project hope you enjoy it.</Text>
             </Pane>
             <Pane
+              className='textPane'
               elevation={3}
               float="center"
               height={200}
@@ -69,6 +72,9 @@ class AboutPage extends Component {
   }
 };
 
+const mapStateToProps = state => ({
+  user: state.user,
+  
+});
 
-
-export default connect()(AboutPage);
+export default connect(mapStateToProps)(AboutPage);

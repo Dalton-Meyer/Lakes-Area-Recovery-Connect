@@ -49,7 +49,7 @@ const Nav = (props) => (
               </Pane>
             )}
           >
-            <Avatar cursor='pointer' margin={10} isSolid color='green' name={props.user.username} size={40} />
+            <Avatar className='avatar' cursor='pointer' margin={10} isSolid color='green' name={props.user.username} size={40} />
           </SelectMenu>
         </>
         : <Link className='nav-link' to='/login'>Login/Register</Link>}

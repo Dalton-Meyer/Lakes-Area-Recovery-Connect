@@ -57,6 +57,7 @@ class Meeting extends Component {
                 justifyContent="center"
                 border="default">
                 <Pane
+                    className='background'
                     width='70%'
                     height={800}
                     display="flex"
@@ -82,8 +83,8 @@ class Meeting extends Component {
                                 <option value="5">Moorhead</option>
                             </Select>
                         </Pane>
-                        <Table>
-                            <Table.Head>
+                        <Table className='table'>
+                            <Table.Head className='tableHead'>
                                 <Table.TextHeaderCell>
                                     Name
                                 </Table.TextHeaderCell>
@@ -97,7 +98,7 @@ class Meeting extends Component {
                                     Location
                                 </Table.TextHeaderCell>
                             </Table.Head>
-                            <Table.Body height={350}>
+                            <Table.Body maxHeight={350}>
                                 {this.props.meeting.map((el) => {
                                     return (
                                         <Table.Row>

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { NavLink, Redirect } from 'react-router-dom';
+import {Pane} from 'evergreen-ui'
+import './LoginPage.css'
 
 class LoginPage extends Component {
   state = {
@@ -40,7 +42,21 @@ class LoginPage extends Component {
 
   render() {
     return (
-      <div>
+      <Pane
+        width='100%'
+        display="flex"
+        alignItems="center"
+        justifyContent="center"
+        border="default">
+        <Pane
+        className='background'
+          width='70%'
+          height={800}
+          display="flex"
+          alignItems="center"
+          justifyContent="center"
+          border="default">
+      <div className='loginForm'>
         {this.renderRedirect()}
         {this.props.errors.loginMessage && (
           <h2
@@ -94,6 +110,8 @@ class LoginPage extends Component {
           </NavLink>
         </center>
       </div>
+      </Pane>
+      </Pane>
     );
   }
 }

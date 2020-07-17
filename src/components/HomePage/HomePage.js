@@ -14,12 +14,14 @@ class HomePage extends Component{
   render(){
     return(
   <Pane
+    className='sideBack'
     width='100%'
     display="flex"
     alignItems="center"
     justifyContent="center"
     border="default">
     <Pane
+    className='background'
       width='70%'
       height={800}
       display="flex"
@@ -29,6 +31,7 @@ class HomePage extends Component{
         
         <br />
         <Pane
+          className='textPane'
           elevation={3}
           float="center"
           width={600}
@@ -44,8 +47,8 @@ class HomePage extends Component{
           <Text size={600}>Helping people in recovery around the Lakes Area stay organized and connected with their community.</Text>
         </Pane>
         <h2>Upcoming Events</h2>
-        <Table>
-          <Table.Head>
+        <Table className='table'>
+          <Table.Head className='tableHead'>
             <Table.TextHeaderCell>
               Event
           </Table.TextHeaderCell>

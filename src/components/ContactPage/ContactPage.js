@@ -38,6 +38,7 @@ class Contact extends Component {
         justifyContent="center"
         border="default">
         <Pane
+          className='background'
           width='70%'
           height={800}
           display="flex"
@@ -54,8 +55,8 @@ class Contact extends Component {
               value={this.state.value}
               onChange={(value) => this.update(value)}
             />
-            <Table>
-              <Table.Head>
+            <Table className='table'>
+              <Table.Head className='tableHead'>
                 <Table.TextHeaderCell>
                   Name
                 </Table.TextHeaderCell>

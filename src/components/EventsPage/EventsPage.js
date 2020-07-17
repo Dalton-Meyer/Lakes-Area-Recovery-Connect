@@ -67,6 +67,7 @@ class Events extends Component {
                 border="default">
                 {Number(this.props.user.user_access) > 1 ?
                     <Pane
+                        className='background'
                         width='70%'
                         height={800}
                         display="flex"
@@ -102,8 +103,8 @@ class Events extends Component {
                                 <option value="3">Other</option>
                             </Select>
                             <Button margin={10} appearance="primary" iconBefore="download" onClick={() => this.Submit()}>Submit</Button>
-                            <Table>
-                                <Table.Head>
+                            <Table className='table'>
+                                <Table.Head className='tableHead'>
                                     <Table.TextHeaderCell>
                                         Event
                                     </Table.TextHeaderCell>
@@ -123,7 +124,7 @@ class Events extends Component {
                                         Remove
                                     </Table.TextHeaderCell>
                                 </Table.Head>
-                                <Table.Body>
+                                <Table.Body maxHeight={350}>
                                     {this.props.event.map((el, index) => {
                                         return (<div key={index}>
                                             <Table.Row>
@@ -142,6 +143,7 @@ class Events extends Component {
                     </Pane>
 
                     : <Pane
+                        className='background'
                         width='70%'
                         height={800}
                         display="flex"
@@ -149,8 +151,8 @@ class Events extends Component {
                         border="default">
                         <div className='events'>
                             <h1>All Events</h1>
-                            <Table>
-                                <Table.Head>
+                            <Table className='table'>
+                                <Table.Head className='tableHead'>
                                     <Table.TextHeaderCell>
                                         Event
                                     </Table.TextHeaderCell>
@@ -167,7 +169,7 @@ class Events extends Component {
                                         Group
                                     </Table.TextHeaderCell>
                                 </Table.Head>
-                                <Table.Body>
+                                <Table.Body maxHeight={350}>
                                     {this.props.event.map((el, index) => {
                                         return (<div key={index}>
                                             <Table.Row>
