@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Redirect } from 'react-router-dom';
 import {Pane} from 'evergreen-ui'
 import './RegisterPage.css'
+import swal from 'sweetalert'
 class RegisterPage extends Component {
   state = {
     username: '',
     password: '',
+    redirect: false
   };
 
   registerUser = (event) => {
@@ -19,7 +21,7 @@ class RegisterPage extends Component {
           username: this.state.username,
           password: this.state.password,
         },
-      });
+      }); 
     } else {
       this.props.dispatch({type: 'REGISTRATION_INPUT_ERROR'});
     }
@@ -30,7 +32,11 @@ class RegisterPage extends Component {
       [propertyName]: event.target.value,
     });
   }
-
+  renderRedirect = () => {
+    if (this.state.redirect === true) {
+      return <Redirect to = '/home'/>
+    }
+  }
   render() {
     return (
       <Pane
@@ -48,6 +54,8 @@ class RegisterPage extends Component {
           justifyContent="center"
           border="default">
       <div className='registerForm'>
+        {this.renderRedirect()}
+        {this.props.user.id  ? (this.setState({redirect: true})) : false}
         {this.props.errors.registrationMessage && (
           <h2
             className="alert"
@@ -112,6 +120,7 @@ class RegisterPage extends Component {
 // const mapStateToProps = ({errors}) => ({ errors });
 const mapStateToProps = state => ({
   errors: state.errors,
+  user: state.user,
 });
 
 export default connect(mapStateToProps)(RegisterPage);
