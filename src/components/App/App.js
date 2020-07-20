@@ -5,17 +5,11 @@ import {
   Redirect,
   Switch,
 } from 'react-router-dom';
-
 import { connect } from 'react-redux';
-
 import Nav from '../Nav/Nav';
 import Footer from '../Footer/Footer';
-
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute'
-
 import AboutPage from '../AboutPage/AboutPage';
- 
-
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage'
 import HomePage from '../HomePage/HomePage'
@@ -23,7 +17,6 @@ import MeetingPage from '../MeetingPage/MeetingPage'
 import ContactPage from '../ContactPage/ContactPage'
 import ReadingPage from '../ReadingPage/ReadingPage'
 import NotesPage from '../NotesPage/NotesPage'
-
 import './App.css';
 import EventsPage from '../EventsPage/EventsPage';
 
