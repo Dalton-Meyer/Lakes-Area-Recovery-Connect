@@ -8,7 +8,7 @@ import './ContactPage.css'
 class Contact extends Component {
   state = {
     options: [
-      { label: 'Support', value: 'support' },
+      // { label: 'Support', value: 'support' },
       { label: 'Treatment', value: 'treat' },
       { label: 'Help Line', value: 'help' },
     ],
