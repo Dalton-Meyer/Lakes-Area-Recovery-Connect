@@ -129,7 +129,7 @@ class Events extends Component {
                                         Remove
                                     </Table.TextHeaderCell>
                                 </Table.Head>
-                                <Table.Body maxHeight={350}>
+                                <Table.Body maxHeight={350} className='tableHead'>
                                     {this.props.event.map((el, index) => {
                                         return (<div key={index}>
                                             <Table.Row>
@@ -174,7 +174,7 @@ class Events extends Component {
                                         Group
                                     </Table.TextHeaderCell>
                                 </Table.Head>
-                                <Table.Body maxHeight={350}>
+                                <Table.Body maxHeight={350} className='tableHead'>
                                     {this.props.event.map((el, index) => {
                                         return (<div key={index}>
                                             <Table.Row>

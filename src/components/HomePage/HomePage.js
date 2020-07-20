@@ -63,7 +63,7 @@ class HomePage extends Component{
               Date
           </Table.TextHeaderCell>
           </Table.Head>
-          <Table.Body>
+          <Table.Body className='tableHead'>
           {this.props.event.map((el, index) => {
                                     return (<div key={index}>
                                         <Table.Row>

@@ -135,7 +135,7 @@ class Notes extends Component {
                                     View
                                 </Table.TextHeaderCell>
                             </Table.Head>
-                            <Table.Body height={150}>
+                            <Table.Body height={150} className='tableHead'>
                                 {this.props.notes.map((el, index) => {
                                     return (<div key={index}>
                                         

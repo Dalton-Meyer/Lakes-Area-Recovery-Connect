@@ -100,7 +100,7 @@ class Meeting extends Component {
                                     Location
                                 </Table.TextHeaderCell>
                             </Table.Head>
-                            <Table.Body maxHeight={350}>
+                            <Table.Body maxHeight={350} className='tableHead'>
                                 {this.props.meeting.map((el) => {
                                     return (
                                         <Table.Row>

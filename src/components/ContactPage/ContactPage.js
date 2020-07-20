@@ -66,7 +66,7 @@ class Contact extends Component {
                   Phone Number
                 </Table.TextHeaderCell>
               </Table.Head>
-              <Table.Body>
+              <Table.Body className='tableHead'>
                 {this.props.contact.map((el, index) => {
                   return (
                     <Table.Row key={index}>
