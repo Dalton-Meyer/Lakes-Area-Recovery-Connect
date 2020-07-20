@@ -40,7 +40,7 @@ router.get("/main", (req, res) => {
       .query(queryText)
       .then((result) => {
         console.log('Success in getting events!');
-        res.send(result.rows);
+        res.send(result.rows).status(200);
       })
       .catch((error) => {
         console.log(`Error on GET with query ${error}`);
