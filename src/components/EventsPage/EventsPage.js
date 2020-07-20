@@ -24,6 +24,7 @@ class Events extends Component {
     }
 
     Submit = () => {
+        if (this.state.name !== '' || this.state.location !== '' || this.state.date !== '' || this.state.time !== '') {
         this.props.dispatch({ type: "ADD_EVENT", payload: this.state })
         // sends the info inside the current state for a post request to the server adding a new event
         // then reset the state back to blank
@@ -40,6 +41,12 @@ class Events extends Component {
             text: "You added a new event!",
             icon: "success",
         });
+    }else{
+        swal({
+            title: 'Please fill out all the inputs',
+            icon: 'info'
+        })
+    }
     }
     Delete = (id) => {
         // sweetalert pops up asking you to confirm if you want to delete a event form database

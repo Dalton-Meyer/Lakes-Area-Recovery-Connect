@@ -25,6 +25,7 @@ class Notes extends Component {
         // when edit is clicked it sets the state to the value of the note you clicked
         // and pops up 2 new buttons if you hit cancel it will reset state and nothing will happen
         // if you hit submit it will update the info in the database to the new info
+        if (this.state.note !== '' || this.state.title !== '') {
         this.props.dispatch({ type: "EDIT_NOTE", payload: this.state })
         this.setState({ isShown: false })
         this.setState({
@@ -36,6 +37,12 @@ class Notes extends Component {
             text: "Your note has been updated",
             icon: "success",
           }); // lets you know new info has been submitted
+        }else{
+            swal({
+                title: 'Please fill out all inputs',
+                icon: 'info'
+            })
+        }
     }
     Delete = (id, user) => {
         // function takes the id of the note and sends off to the server to delete it
@@ -66,6 +73,7 @@ class Notes extends Component {
     }
     Submit = () => {
         // sends off information in current state to add a new note to the database
+        if (this.state.note !== '' || this.state.title !== '') {
         this.props.dispatch({ type: "ADD_NOTE", payload: this.state })
         this.setState({
             note: '',
@@ -76,7 +84,12 @@ class Notes extends Component {
             text: "You added a new note!",
             icon: "success",
           }); // lets you know it was sent off
-       
+        }else{
+            swal({
+                title: 'Please fill out all inputs',
+                icon: 'info'
+            })
+        }
     }
    
     render() {
