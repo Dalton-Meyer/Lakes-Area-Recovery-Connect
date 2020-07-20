@@ -51,7 +51,7 @@ class LoginPage extends Component {
         <Pane
         className='background'
           width='70%'
-          height={800}
+          height={850}
           display="flex"
           alignItems="center"
           justifyContent="center"

@@ -20,7 +20,7 @@ class AboutPage extends Component {
         <Pane
         className='background'
           width='70%'
-          height={800}
+          height={850}
           display="flex"
           justifyContent="center"
           border="default">

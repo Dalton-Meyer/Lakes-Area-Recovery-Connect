@@ -91,7 +91,7 @@ class Notes extends Component {
                     className='background'
                     width='70%'
                     display="flex"
-                    height={800}
+                    height={850}
                     justifyContent="center"
                     border="default">
                     <div className='notes'>
